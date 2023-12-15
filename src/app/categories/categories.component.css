@@ -1,0 +1,17 @@
+.shadow-effect {
+  border: none;
+}
+.btn-sub {
+  height: 48px;
+  width: 100%;
+  border: none;
+  font-size: 13px;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+}
+input[type="text"] {
+  height: 50px;
+  padding-left: 20px;
+  font-size: 12px;
+  width: 100%;
+}
