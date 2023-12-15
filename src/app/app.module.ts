@@ -19,25 +19,25 @@ import { FormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    DashboardComponent,
-    CategoriesComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
-  ],
-  providers: [
-    // provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    // provideFirestore(() => getFirestore()),
-    // AngularFirestore,
-  ],
-  bootstrap: [AppComponent],
+	declarations: [
+		AppComponent,
+		HeaderComponent,
+		FooterComponent,
+		DashboardComponent,
+		CategoriesComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FormsModule,
+		AngularFireModule.initializeApp(environment.firebaseConfig),
+		AngularFirestoreModule,
+	],
+	providers: [
+		// provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+		// provideFirestore(() => getFirestore()),
+		// AngularFirestore,
+	],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}
