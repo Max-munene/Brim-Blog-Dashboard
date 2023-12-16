@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { AngularFireModule } from '@angular/fire/compat';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,10 +29,12 @@ import { CategoriesComponent } from './categories/categories.component';
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		FormsModule,
 		AngularFireModule.initializeApp(environment.firebaseConfig),
 		AngularFirestoreModule,
+		ToastrModule.forRoot(),
 	],
 	providers: [
 		// provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),

@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; // Import AngularFirestore
+import { AngularFirestore } from '@angular/fire/compat/firestore'; // Import
+import { ToastrService } from 'ngx-toastr';
+import { map } from 'rxjs';
+import { Action } from 'rxjs/internal/scheduler/Action';
+AngularFirestore;
 
 @Injectable({
 	providedIn: 'root',
 })
 export class CategoriesService {
-	constructor(private afs: AngularFirestore) {}
+	constructor(private afs: AngularFirestore, private toastr: ToastrService) {}
 
 	saveData(data: any) {
 		this.afs
@@ -13,6 +17,7 @@ export class CategoriesService {
 			.add(data)
 			.then((docRef) => {
 				console.log(docRef);
+				this.toastr.success('Category saved successfully!');
 			})
 			//path method
 			// this.afs.doc(`categories/${docRef.id}`).collection('subcategory').add(subCategoryData)
@@ -20,5 +25,21 @@ export class CategoriesService {
 			.catch((error) => {
 				console.log(error);
 			});
+	}
+
+	loadData() {
+		return this.afs
+			.collection('categories')
+			.snapshotChanges()
+			.pipe(
+				map((actions) => {
+					return actions.map((a) => {
+						const data = a.payload.doc.data();
+						const id = a.payload.doc.id;
+
+						return { id, data };
+					});
+				}),
+			);
 	}
 }

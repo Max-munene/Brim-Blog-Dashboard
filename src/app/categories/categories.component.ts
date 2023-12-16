@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../services/categories.service';
 import { Category } from '../models/category';
 
@@ -9,6 +9,12 @@ import { Category } from '../models/category';
 })
 export class CategoriesComponent {
 	constructor(private categoryService: CategoriesService) {}
+
+	ngOnInit(): void {
+		this.categoryService.loadData().subscribe((val) => {
+			console.log(val);
+		});
+	}
 
 	// Submit Form Handler
 	onSubmit(formData: any) {
