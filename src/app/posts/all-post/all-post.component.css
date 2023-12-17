@@ -1,0 +1,7 @@
+.shadow-effect {
+	border: none;
+}
+.btn-add {
+	color: white;
+	background-color: var(--primary-color);
+}
