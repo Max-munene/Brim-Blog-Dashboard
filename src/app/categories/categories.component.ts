@@ -8,11 +8,14 @@ import { Category } from '../models/category';
 	styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent {
+	categoryArray!: Array<any>;
+
 	constructor(private categoryService: CategoriesService) {}
 
 	ngOnInit(): void {
 		this.categoryService.loadData().subscribe((val) => {
 			console.log(val);
+			this.categoryArray = val;
 		});
 	}
 
