@@ -42,4 +42,26 @@ export class CategoriesService {
 				}),
 			);
 	}
+
+	updateData(id: any, EditData: any) {
+		this.afs
+
+			.doc(`categories/${id}`)
+			.update(EditData)
+			.then((docRef) => {
+				console.log(docRef);
+				this.toastr.success('Data updated successfully!');
+			});
+	}
+
+	deleteData(id: any) {
+		this.afs
+			.doc(`categories/${id}`)
+
+			.delete()
+			.then((docRef) => {
+				console.log(docRef);
+				this.toastr.success('Category deleted!');
+			});
+	}
 }

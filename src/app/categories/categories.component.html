@@ -1,8 +1,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 bg-secondary-theme p-5 shadow-effect">
-			<h3 class="text-center text-theme-primary">New Category</h3>
-			<p class="text-center mb-5">You can add new categories</p>
+			<h3 class="text-center text-theme-primary">{{ formStatus }} Category</h3>
+			<p class="text-center mb-5">
+				You can {{ formStatus | lowercase }} new categories
+			</p>
 			<!-- input-group -->
 			<form
 				#categoryForm="ngForm"
@@ -15,7 +17,7 @@
 						class="form-control shadow-effect"
 						placeholder="Add new Category"
 						#newCategory="ngModel"
-						ngModel
+						[(ngModel)]="formCategory"
 						required
 						[ngClass]="{
 							'is-invalid': newCategory.touched && newCategory.invalid
@@ -30,7 +32,7 @@
 					<button
 						[disabled]="categoryForm.invalid"
 						class="btn btn-block btn-info text-white mb-2 ms-2 btn-sub">
-						Add Category
+						{{ formStatus }} Category
 					</button>
 				</div>
 			</form>
@@ -52,9 +54,20 @@
 						</thead>
 						<tbody>
 							<tr *ngFor="let category of categoryArray; let i = index">
-								<td>{{ i }}</td>
+								<td>{{ i + 1 }}</td>
 								<td>{{ category.data.category }}</td>
-								<td></td>
+								<td>
+									<button
+										class="btn btn-sm btn-warning"
+										(click)="onEdit(category.data.category, category.id)">
+										Edit
+									</button>
+									<button
+										class="btn btn-sm btn-danger ms-2"
+										(click)="onDelete(category.id)">
+										Delete
+									</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>

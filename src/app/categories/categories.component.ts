@@ -8,14 +8,17 @@ import { Category } from '../models/category';
 	styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent {
-	categoryArray!: Array<any>;
+	categoryArray!: Array<any>; //Property to hold the array from firestore
+	formCategory!: string;
+	formStatus: string = 'Add';
+	categoryId!: string;
 
 	constructor(private categoryService: CategoriesService) {}
 
 	ngOnInit(): void {
 		this.categoryService.loadData().subscribe((val) => {
 			console.log(val);
-			this.categoryArray = val;
+			this.categoryArray = val; //assign loaded data to categoryArray property
 		});
 	}
 
@@ -25,7 +28,14 @@ export class CategoriesComponent {
 			category: formData.value.category,
 		};
 
-		this.categoryService.saveData(categoryData);
+		if (this.formStatus == 'Add') {
+			this.categoryService.saveData(categoryData);
+			formData.reset(); //Clear input area after submit
+		} else if (this.formStatus == 'Edit') {
+			this.categoryService.updateData(this.categoryId, categoryData);
+			formData.reset(); //Clear input area after submit
+			this.formStatus = 'Add';
+		}
 
 		// let subCategoryData = {
 		// 	subcategory: 'subCategory1',
@@ -66,5 +76,15 @@ export class CategoriesComponent {
 		// 	.catch((error) => {
 		// 		console.log(error);
 		// 	});
+	}
+
+	onEdit(category: any, id: any) {
+		this.formCategory = category;
+		this.formStatus = 'Edit';
+		this.categoryId = id;
+	}
+
+	onDelete(id: any) {
+		this.categoryService.deleteData(id);
 	}
 }
