@@ -61,3 +61,7 @@ body {
 	color: var(--secondary-color);
 	background-color: var(--primary-color);
 }
+.btn-sub {
+	color: white;
+	background-color: var(--primary-color);
+}
