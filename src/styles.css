@@ -16,7 +16,7 @@ $body-text-color: #596392;
 $navbar-footer-color: #f9f9f9; */
 body {
 	font-family: 'Roboto', sans-serif;
-	font-size: 12px;
+	font-size: 14px;
 	color: var(--body-text-color);
 }
 .text-theme-primary {
@@ -28,6 +28,13 @@ body {
 	background-color: var(--secondary-color);
 	color: var(--primary-color);
 	text-decoration: none;
+}
+
+input[type='text'],
+input[type='email'] {
+	height: 60px;
+	padding-right: 20px;
+	width: 100% !important;
 }
 .bg-theme {
 	background-color: var(--primary-color);
