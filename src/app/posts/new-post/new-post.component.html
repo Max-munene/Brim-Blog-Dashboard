@@ -18,6 +18,20 @@
 								(keyup)="onTitleChanged($event)"
 								formControlName="title" />
 						</div>
+						<div *ngIf="fc['title'].errors?.['required']">
+							<div
+								class="alert alert-danger"
+								*ngIf="fc['title'].touched && fc['title'].invalid">
+								Title is required!
+							</div>
+						</div>
+						<div *ngIf="fc['title'].errors?.['minlength']">
+							<div
+								class="alert alert-danger"
+								*ngIf="fc['title'].touched && fc['title'].invalid">
+								Title length should be 10 characters!
+							</div>
+						</div>
 						<div class="form-group">
 							<label>Permalink</label>
 							<input

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators,
+} from '@angular/forms';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -19,12 +24,15 @@ export class NewPostComponent {
 		private fb: FormBuilder,
 	) {
 		this.postForm = this.fb.group({
-			title: [''],
-			permalink: [''],
-			excerpt: [''],
-			category: [''],
-			postImg: [''],
-			content: [''],
+			title: ['', [Validators.required, Validators.minLength(10)]],
+			permalink: new FormControl(
+				{ value: '', disabled: true },
+				Validators.required,
+			),
+			excerpt: ['', [Validators.required, Validators.minLength(50)]],
+			category: ['', Validators.required],
+			postImg: ['', Validators.required],
+			content: ['', Validators.required],
 		});
 	}
 
@@ -32,6 +40,11 @@ export class NewPostComponent {
 		this.categoryService.loadData().subscribe((val) => {
 			this.categoriesList = val;
 		});
+	}
+
+	// convenience getter for easy access to form fields
+	get fc() {
+		return this.postForm.controls;
 	}
 
 	onTitleChanged($event: any) {
