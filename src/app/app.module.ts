@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { ToastrModule } from 'ngx-toastr';
@@ -43,6 +44,7 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
 		ToastrModule.forRoot(),
 		AngularEditorModule,
 		HttpClientModule,
+		ReactiveFormsModule,
 	],
 	providers: [
 		// provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),

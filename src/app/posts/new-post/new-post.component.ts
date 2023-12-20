@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
@@ -11,8 +12,21 @@ export class NewPostComponent {
 	imgSrc: any = './assets/images/image-placeholder.jpg';
 	selectedImg: any;
 	categoriesList!: Array<any>;
+	postForm!: FormGroup;
 
-	constructor(private categoryService: CategoriesService) {}
+	constructor(
+		private categoryService: CategoriesService,
+		private fb: FormBuilder,
+	) {
+		this.postForm = this.fb.group({
+			title: [''],
+			permalink: [''],
+			excerpt: [''],
+			category: [''],
+			postImg: [''],
+			content: [''],
+		});
+	}
 
 	ngOnInit() {
 		this.categoryService.loadData().subscribe((val) => {
