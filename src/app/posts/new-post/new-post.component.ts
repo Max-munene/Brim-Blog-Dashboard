@@ -65,13 +65,14 @@ export class NewPostComponent {
 
 	onSubmit() {
 		console.log(this.postForm.value);
+		let splitted = this.postForm.value.category.split('-'); //to split caategory data at the point of the hiphen
 
 		const postData: Post = {
 			title: this.postForm.value.title,
 			permalink: this.postForm.value.permalink,
 			category: {
-				categoryId: '',
-				category: '',
+				categoryId: splitted[0],
+				category: splitted[1],
 			},
 			postImgPath: '',
 			excerpt: this.postForm.value.excerpt,
@@ -81,5 +82,6 @@ export class NewPostComponent {
 			status: 'new',
 			createdAt: new Date(),
 		};
+		console.log(postData);
 	}
 }

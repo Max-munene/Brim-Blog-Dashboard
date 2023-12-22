@@ -95,7 +95,7 @@
 							Select Category
 						</option>
 						<option
-							value="category.data.category"
+							value="{{ category.id }}-{{ category.data.category }}"
 							*ngFor="let category of categoriesList">
 							{{ category.data.category }}
 						</option>

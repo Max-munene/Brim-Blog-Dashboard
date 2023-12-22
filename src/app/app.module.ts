@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from 'src/environments/environment';
 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -45,6 +46,7 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
 		AngularEditorModule,
 		HttpClientModule,
 		ReactiveFormsModule,
+		AngularFireStorageModule,
 	],
 	providers: [
 		// provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
