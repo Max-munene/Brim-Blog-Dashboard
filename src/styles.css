@@ -60,6 +60,10 @@ input[type='email'] {
 	border: none;
 }
 
+.toast-position {
+	position: fixed;
+}
+
 .btn-theme {
 	height: 48px;
 	width: 100%;
