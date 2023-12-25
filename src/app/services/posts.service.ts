@@ -26,15 +26,18 @@ export class PostsService {
 				.subscribe((URL) => {
 					postData.postImgPath = URL;
 					console.log(postData);
-
-					this.afs
-						.collection('posts')
-						.add(postData)
-						.then((docRef) => {
-							console.log(docRef);
-							this.toastr.success('Post added succesfully!');
-						});
+					this.saveData(postData);
 				});
 		});
+	}
+
+	saveData(postData: any) {
+		this.afs
+			.collection('posts')
+			.add(postData)
+			.then((docRef) => {
+				console.log(docRef);
+				this.toastr.success('Post added succesfully!');
+			});
 	}
 }
