@@ -15,7 +15,7 @@ import { PostsService } from 'src/app/services/posts.service';
 	styleUrls: ['./new-post.component.css'],
 })
 export class NewPostComponent {
-	permalink: string = '';
+	permalink!: string;
 	imgSrc: any = './assets/images/image-placeholder.jpg';
 	selectedImg: any;
 	categoriesList!: Array<any>;
@@ -53,6 +53,11 @@ export class NewPostComponent {
 	onTitleChanged($event: any) {
 		const title = $event.target.value;
 		this.permalink = title.replace(/\s+/g, '-');
+
+		const permalinkControl = this.postForm.get('permalink');
+		if (permalinkControl) {
+			permalinkControl.setValue(this.permalink);
+		}
 	}
 
 	showPreview($event: any) {
@@ -66,12 +71,12 @@ export class NewPostComponent {
 	}
 
 	onSubmit() {
-		console.log(this.postForm.value);
+		console.log('PostForm', this.postForm.value);
 		let splitted = this.postForm.value.category.split('-'); //to split caategory data at the point of the hiphen
 
 		const postData: Post = {
 			title: this.postForm.value.title,
-			permalink: this.postForm.value.permalink,
+			permalink: this.permalink,
 			category: {
 				categoryId: splitted[0],
 				category: splitted[1],
@@ -84,6 +89,8 @@ export class NewPostComponent {
 			status: 'new',
 			createdAt: new Date(),
 		};
-		this.postService.uploadImage(this.selectedImg);
+
+		console.log(postData);
+		this.postService.uploadImage(this.selectedImg, postData);
 	}
 }

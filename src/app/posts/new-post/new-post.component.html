@@ -17,6 +17,7 @@
 								class="form-control"
 								(keyup)="onTitleChanged($event)"
 								formControlName="title"
+								(input)="onTitleChanged($event)"
 								[ngClass]="{
 									'is-invalid': fc['title'].touched && fc['title'].invalid
 								}" />
@@ -41,7 +42,6 @@
 								type="text"
 								name="permalink"
 								class="form-control"
-								[(ngModel)]="permalink"
 								formControlName="permalink" />
 						</div>
 						<div *ngIf="fc['permalink'].errors?.['required']">
