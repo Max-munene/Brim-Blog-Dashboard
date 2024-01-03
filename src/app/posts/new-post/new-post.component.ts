@@ -5,6 +5,7 @@ import {
 	FormGroup,
 	Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { CategoriesService } from 'src/app/services/categories.service';
 import { PostsService } from 'src/app/services/posts.service';
@@ -20,22 +21,44 @@ export class NewPostComponent {
 	selectedImg: any;
 	categoriesList!: Array<any>;
 	postForm!: FormGroup;
+	post: any;
+	formStatus: string = 'Add New';
 
 	constructor(
 		private categoryService: CategoriesService,
 		private fb: FormBuilder,
 		private postService: PostsService,
+		private route: ActivatedRoute,
 	) {
-		this.postForm = this.fb.group({
-			title: ['', [Validators.required, Validators.minLength(10)]],
-			permalink: new FormControl(
-				{ value: '', disabled: true },
-				Validators.required,
-			),
-			excerpt: ['', [Validators.required, Validators.minLength(50)]],
-			category: ['', Validators.required],
-			postImg: ['', Validators.required],
-			content: ['', Validators.required],
+		this.route.queryParams.subscribe((val) => {
+			console.log(val);
+			this.postService.loadOneData(val['id']).subscribe((post) => {
+				this.post = post;
+
+				this.postForm = this.fb.group({
+					title: [
+						this.post.title,
+						[Validators.required, Validators.minLength(10)],
+					],
+					permalink: new FormControl(
+						{ value: this.post.permalink, disabled: true },
+						Validators.required,
+					),
+					excerpt: [
+						this.post.excerpt,
+						[Validators.required, Validators.minLength(50)],
+					],
+					category: [
+						`${this.post.category.categoryId}-${this.post.category.category}`,
+						Validators.required,
+					],
+					postImg: ['', Validators.required],
+					content: [this.post.content, Validators.required],
+				});
+
+				this.imgSrc = this.post.postImgPath;
+				this.formStatus = 'Edit';
+			});
 		});
 	}
 

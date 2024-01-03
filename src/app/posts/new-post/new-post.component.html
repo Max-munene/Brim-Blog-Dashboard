@@ -1,8 +1,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-center">
-			<h3 class="text-theme-primary">Add New Post</h3>
-			<p class="mb-5">You can add new post here</p>
+			<h3 class="text-theme-primary">{{ formStatus }} Post</h3>
+			<p class="mb-5">You can {{ formStatus | lowercase }} post here</p>
 		</div>
 	</div>
 	<form [formGroup]="postForm">

@@ -60,4 +60,8 @@ export class PostsService {
 				}),
 			);
 	}
+	loadOneData(id: any) {
+		return this.afs.collection('posts').doc(id).valueChanges();
+		// return this.afs.doc(`posts/${id}`).valueChanges(); //alternative
+	}
 }
